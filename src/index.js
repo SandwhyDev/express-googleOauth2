@@ -2,9 +2,10 @@ import express from "express";
 import cors from "cors";
 import path from "path";
 import env from "dotenv";
-import googleOauth from "./controller/googleOauth";
 import passport from "passport";
 import session from "express-session";
+import Oauth from "./controller/login_oauth";
+import views_controller from "./controller/views_controller";
 env.config();
 require("./libs/auth.");
 const app = express();
@@ -26,11 +27,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //ROUTES
-app.use("/api", googleOauth);
-
-app.get("/", (req, res) => {
-  res.send(`<a href="/api/auth/google">Login with google</a>`);
-});
+app.use("/api", Oauth);
+app.use("/", views_controller);
 
 //LISTENER
 app.listen(PORT, "0.0.0.0", () => {
