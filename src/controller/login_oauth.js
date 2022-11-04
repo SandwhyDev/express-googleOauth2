@@ -35,4 +35,20 @@ Oauth.get(
   })
 );
 
+// FACEBOOK
+Oauth.get(
+  "/auth/facebook",
+  passport.authenticate("facebook", {
+    scope: ["email", "profile"],
+  })
+);
+
+Oauth.get(
+  "/facebook/callback",
+  passport.authenticate("facebook", {
+    successRedirect: "/protected",
+    failureRedirect: "/auth/facebook/failure",
+  })
+);
+
 export default Oauth;
