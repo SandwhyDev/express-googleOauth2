@@ -14,7 +14,7 @@ const isLoggedIn = (req, res, next) => {
 
 views_controller.get("/", (req, res) => {
   res.send(
-    `<a href="/api/auth/google">Login with google</a> <br /> <a href="/api/auth/github">Login with github</a> <br /> <a href="/api/facebook/callback">Login with facebook</a>`
+    `<a href="/api/auth/google">Login with google</a> <br /> <a href="/api/auth/github">Login with github</a> <br /> <a href="/api/facebook/callback">Login with facebook</a> <br /> <a href="/api/auth/twitter">Login with twitter</a>`
   );
 });
 

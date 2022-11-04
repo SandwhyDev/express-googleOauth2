@@ -51,4 +51,15 @@ Oauth.get(
   })
 );
 
+// TWITTER
+Oauth.get("/auth/twitter", passport.authenticate("twitter"));
+
+Oauth.get(
+  "/twitter/callback",
+  passport.authenticate("twitter", {
+    successRedirect: "/protected",
+    failureRedirect: "/auth/facebook/failure",
+  })
+);
+
 export default Oauth;

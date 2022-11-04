@@ -7,7 +7,7 @@ import session from "express-session";
 import Oauth from "./controller/login_oauth";
 import views_controller from "./controller/views_controller";
 env.config();
-require("./libs/auth.");
+require("./libs/authStrategy.");
 const app = express();
 const { PORT, SECRET } = process.env;
 

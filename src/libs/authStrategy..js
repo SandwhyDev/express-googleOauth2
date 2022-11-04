@@ -2,12 +2,15 @@ import passport from "passport";
 import google from "passport-google-oauth2";
 import github from "passport-github2";
 import facebook from "passport-facebook";
+import twitter from "passport-twitter";
 import env from "dotenv";
 env.config();
 
 const GoogleStrategy = google.Strategy;
 const GithubStrategy = github.Strategy;
 const FacebookStrategy = facebook.Strategy;
+const TwitterStrategy = twitter.Strategy;
+
 const {
   GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET,
@@ -18,6 +21,9 @@ const {
   FACEBOOK_CLIENT_ID,
   FACEBOOK_CLIENT_SECRET,
   CALLBACK_URL_FACEBOOK,
+  CALLBACK_URL_TWITTER,
+  TWITTER_CLIENT_ID,
+  TWITTER_CLIENT_SECRET,
 } = process.env;
 
 passport.serializeUser((user, done) => {
@@ -76,6 +82,22 @@ passport.use(
         "gender",
         "picture.type(large)",
       ],
+    },
+    (request, accessToken, refreshToken, profile, done) => {
+      console.log(profile);
+      return done(null, profile);
+    }
+  )
+);
+
+// TWITTER
+passport.use(
+  new TwitterStrategy(
+    {
+      consumerKey: TWITTER_CLIENT_ID,
+      consumerSecret: TWITTER_CLIENT_SECRET,
+      callbackURL: CALLBACK_URL_TWITTER,
+      passReqToCallback: true,
     },
     (request, accessToken, refreshToken, profile, done) => {
       console.log(profile);
